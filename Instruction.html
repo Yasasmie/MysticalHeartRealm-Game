@@ -7,29 +7,29 @@
   <link rel="stylesheet" href="css/instruction-style.css" />
 </head>
 <body>
-    <button class="back-btn">&#x2190;</button>
-    <div class="instruction-bg">
-      <div class="instruction-panel">
-        <h1 class="instruction-title">HOW TO PLAY</h1>
-        <ol class="instruction-list">
-          <li>Choose Your Level and start the game.</li>
-          <li>Pick one card from the face-down cards that matches the displayed card.</li>
-          <li>You can use up to 5 hints during the game.</li>
-          <li>When you click Hint, a math quiz will appear.</li>
-          <li>Solve the math question within 60 seconds to earn a chance to see the back side of the cards.</li>
-          <li>After that, pick the card that matches the displayed heart to continue the game.</li>
-        </ol>
-        <button class="continue-btn">Continue</button>
-      </div>
+  <button class="back-btn">&#x2190;</button>
+  <div class="instruction-bg">
+    <div class="instruction-panel">
+      <h1 class="instruction-title">HOW TO PLAY</h1>
+      <ol class="instruction-list">
+        <li>Choose Your Level and start the game.</li>
+        <li>Pick one card from the face-down cards that matches the displayed card.</li>
+        <li>You can use up to 5 hints during the game.</li>
+        <li>When you click Hint, a math quiz will appear.</li>
+        <li>Solve the math question within 60 seconds to earn a chance to see the back side of the cards.</li>
+        <li>After that, pick the card that matches the displayed heart to continue the game.</li>
+      </ol>
+      <button class="continue-btn">Continue</button>
     </div>
-    <script>
-      document.querySelector('.continue-btn').addEventListener('click', function() {
-        window.location.href = 'Level.html';
-      });
+  </div>
+  <script>
+    document.querySelector('.continue-btn').addEventListener('click', function () {
+      window.location.href = 'Level.html';
+    });
 
-      document.querySelector('.back-btn').addEventListener('click', function() {
-        window.history.back();
-      });
-    </script>
+    document.querySelector('.back-btn').addEventListener('click', function () {
+      window.history.back();
+    });
+  </script>
 </body>
 </html>

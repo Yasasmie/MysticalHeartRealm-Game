@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/level-style.css" />
 </head>
 <body>
-  <button class="back-btn">&#x2190;</button> 
+  <button class="back-btn">&#x2190;</button>
 
   <div class="level-bg">
     <div class="level-overlay">
@@ -20,30 +20,6 @@
     </div>
   </div>
 
-  <script>
-    let selectedLevel = null;
-
-    document.querySelector('.back-btn').addEventListener('click', function() {
-      window.history.back();
-    });
-
-    document.querySelectorAll('.level-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        selectedLevel = this.getAttribute('data-level');
-
-        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-      });
-    });
-
-    document.getElementById('start-btn').addEventListener('click', function() {
-      if(!selectedLevel) {
-        alert('Please select a level to start the game.');
-        return;
-      }
-      localStorage.setItem('selectedLevel', selectedLevel);
-      window.location.href = 'Game.html';
-    });
-  </script>
+  <script src="js/level.js"></script>
 </body>
 </html>

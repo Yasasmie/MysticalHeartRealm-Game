@@ -8,7 +8,6 @@
 <body>
   <div class="game-bg">
     <div class="game-container">
-      
       <div class="header-bar">
         <div class="score-box">
           <span class="label">⭐ Score:</span>
@@ -16,14 +15,14 @@
         </div>
         <div class="rounds-box">
           <span class="label">🎯 Rounds Left:</span>
-          <span class="value" id="rounds-remaining">6</span> 
+          <span class="value" id="rounds-remaining">6</span>
         </div>
       </div>
       <div class="main-content">
         <div class="heart-row">
           <img id="displayed-heart" src="Images/15.png" class="heart-img" alt="Heart">
         </div>
-        
+
         <p class="instruction-text">Match the heart above!</p>
 
         <div class="cards-row">
@@ -37,19 +36,16 @@
             <img class="card-img" src="Images/20.png" alt="Card Back">
           </div>
         </div>
-        
+
         <div class="hint-row">
           <button id="hint-btn" class="hint-btn">🔮 HINT - <span id="hint-count">5</span></button>
-          
         </div>
-        
-
       </div>
     </div>
     <div id="modal-bg" class="modal-bg" style="display:none;">
       <div class="modal-content" id="modal-content"></div>
     </div>
   </div>
-  <script src="game-script.js"></script>
+  <script type="module" src="js/game-script.js"></script>
 </body>
 </html>
