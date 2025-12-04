@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: 'Georgia', serif;
+}
+
+.bg-image {
+  background: url('../Images/7.jpg') no-repeat center center/cover;
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.character-img {
+  max-width: 420px;
+  width: 90%;
+  height: auto;
+  filter: drop-shadow(0 4px 32px rgba(0,0,0,0.5));
+  margin-left: 2vw;
+}
+
+.register-box {
+  flex: 1.2;
+  background: rgba(30,30,40,.7);
+  border-radius: 15px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.36);
+  margin-right: 5vw;
+  padding: 3.5vw 3vw 2vw 3vw;
+  max-width: 600px;
+  min-width: 350px;
+  color: #fff;
+}
+
+.register-box h2 {
+  font-family: 'Luckiest Guy', cursive;
+  font-size: 2.8vw;
+  letter-spacing: 2px;
+  text-align: left;
+  margin-bottom: 2vw;
+  font-weight: normal;
+}
+
+.register-box label {
+  display: block;
+  font-size: 1.45vw;
+  margin-top: 1vw;
+  margin-bottom: 0.3vw;
+}
+
+.register-box input {
+  width: 100%;
+  padding: 1vw 0.8vw;
+  border-radius: 7px;
+  border: none;
+  margin-bottom: 1.2vw;
+  font-size: 1.2vw;
+  background: #eee;
+  color: #1a1a1a;
+  font-family: inherit;
+  outline: none;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 1.5vw;
+}
+
+.register-btn {
+  background: #ffe180;
+  color: #e83a52;
+  font-family: 'Georgia', serif;
+  font-size: 1.7vw;
+  padding: 0.5vw 3vw;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-right: 1vw;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.10);
+}
+
+.register-btn:hover {
+  background: #ffd03c;
+  color: #9c0033;
+}
+
+@media (max-width: 1050px) {
+  .character-img { max-width: 300px; }
+}
+@media (max-width: 800px) {
+  .container { flex-direction: column; }
+  .register-box { margin: 2vw 0; min-width: 60vw; }
+  .character-side { margin-bottom: 2vw; }
+}
+@media (max-width: 600px) {
+  .register-box { max-width: 95vw; min-width: 0; padding: 7vw 6vw; }
+  .register-box h2, .register-btn { font-size: 5vw; }
+  .register-box label { font-size: 4vw; }
+  .character-img { max-width: 200px; }
+}

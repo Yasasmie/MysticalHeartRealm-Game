@@ -1,0 +1,99 @@
+
+        .credits-bg {
+            background: url('../Images/12.jpg') center center/cover fixed no-repeat;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .credits-container {
+            width: 80vw;
+            max-width: 800px; 
+            height: 90vh;
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            padding: 50px 20px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        
+        .credits-title {
+            font-family: monospace; 
+            font-size: 5vw;
+            color: #ecc165;
+            text-shadow: 4px 4px 0 #2b2929; 
+            margin-bottom: 5vh;
+            line-height: 1;
+        }
+
+        .credit-section {
+            margin: 3vh 0;
+        }
+        .credit-role {
+            font-family: 'Georgia', serif;
+            font-size: 2.8vw;
+            font-weight: bold;
+            color: #181818;
+            margin-bottom: 0.5vh;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            line-height: 1.2;
+        }
+        .credit-name {
+            font-family: 'Georgia', serif;
+            font-size: 2.3vw;
+            font-weight: bold; 
+            color: #fcf050; 
+            font-style: normal; 
+            margin-top: 0;
+            line-height: 1.2;
+        }
+
+        .home-btn {
+            background-color: #ffcc00; 
+            color: #222;
+            padding: 15px 40px;
+            font-size: 1.5vw;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.2s;
+            margin-top: 5vh; 
+        }
+        .home-btn:hover {
+            background-color: #ffb700;
+        }
+        .home-btn:active {
+            transform: translateY(2px);
+        }
+
+        @media (max-width: 800px) {
+            .credits-container {
+                width: 90vw;
+                height: 80vh;
+                padding: 40px 15px;
+            }
+            .credits-title {
+                font-size: 10vw;
+                text-shadow: 3px 3px 0 #fff;
+            }
+            .credit-role {
+                font-size: 5.5vw;
+            }
+            .credit-name {
+                font-size: 5vw;
+            }
+            .home-btn {
+                font-size: 4.5vw;
+                padding: 12px 30px;
+                margin-top: 5vh;
+            }
+        }

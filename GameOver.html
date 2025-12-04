@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Over - Mystical Heart Realm</title>
+    <link rel="stylesheet" href="game-style.css">
+    <link rel="stylesheet" href="css/gameover-style.css" />
+</head>
+<body>
+    <div class="game-bg">
+        <div class="game-container">
+            <div class="score-content">
+                <h1 id="congratulations-title">CONGRATULATIONS !!</h1>
+                <p id="level-display">Level Played: <span id="game-level">Loading...</span></p> <p id="score-label">Your Total Score Is :</p>
+                <div id="final-score">0</div>
+                <div class="button-group">
+                    <button id="home-btn" onclick="window.location.href='Dashboard.html'">Go To Home</button>
+                </div>
+            </div>
+            <div class="score-image-container">
+                <img src="Images/13.png" alt="Winning Gamer Girl">
+            </div>
+        </div>
+    </div>
+<script type="module">
+    import { auth, db } from './firebase-config.js';
+    // --- ADDED addDoc and serverTimestamp ---
+    import { doc, getDoc, setDoc, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    
+    // Retrieve score and level from session storage
+    const finalScore = parseInt(sessionStorage.getItem('finalScore') || '0', 10);
+    const gameLevel = sessionStorage.getItem('gameLevel') || 'Unknown';
+    
+    // Display score and level
+    document.getElementById('final-score').innerText = new Intl.NumberFormat().format(finalScore);
+    document.getElementById('game-level').innerText = gameLevel;
+
+    // Clean up session storage after use
+    sessionStorage.removeItem('finalScore');
+    sessionStorage.removeItem('gameLevel');
+
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            const userRef = doc(db, "users", user.uid);
+            const currentUsername = user.email.split('@')[0];
+            
+            try {
+                // --- 1. CHECK/UPDATE TOP-LEVEL HIGH SCORE ---
+                const docSnap = await getDoc(userRef);
+                
+                if (docSnap.exists()) {
+                    const existingData = docSnap.data();
+                    const existingHighScore = existingData.highScore || 0;
+                    
+                    if (finalScore > existingHighScore) {
+                        await setDoc(userRef, {
+                            highScore: finalScore,
+                            level: gameLevel,
+                            username: currentUsername
+                        }, { merge: true });
+                        console.log("High score updated successfully!");
+                    }
+                } else {
+                    // Create new user document if it doesn't exist
+                    await setDoc(userRef, {
+                        highScore: finalScore,
+                        level: gameLevel,
+                        username: currentUsername
+                    });
+                    console.log("New user high score created!");
+                }
+
+                // --- 2. RECORD INDIVIDUAL GAME HISTORY (THE FIX) ---
+                const scoresCollectionRef = collection(userRef, "scores");
+
+                await addDoc(scoresCollectionRef, {
+                    score: finalScore,
+                    level: gameLevel,
+                    date: serverTimestamp() 
+                });
+                console.log("Game session history recorded successfully!");
+                
+            } catch (error) {
+                console.error("Error saving score to Firebase:", error);
+            }
+        } else {
+            console.log("User not logged in. High score not saved.");
+        }
+    });
+</script>
+</body>
+</html>

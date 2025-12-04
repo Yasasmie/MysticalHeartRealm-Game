@@ -1,0 +1,107 @@
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      width: 100vw;
+      position: relative; 
+    }
+    .instruction-bg {
+      background: url('../Images/6.jpg') center center/cover no-repeat;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .instruction-panel {
+      background: rgba(220,210,210,0.7);
+      border-radius: 40px;
+      padding: 3vw 4vw 2vw 4vw;
+      max-width: 70vw;
+      min-width: 350px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .instruction-title {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.7vw;
+      text-align: center;
+      margin-top: 2vw;
+      margin-bottom: 2vw;
+      color: #232121;
+      letter-spacing: 2px;
+    }
+    .instruction-list {
+      font-family: 'Georgia', serif;
+      font-size: 1.25vw;
+      color: #232121;
+      margin-bottom: 2vw;
+      margin-left: 0vw;
+      padding-left: 1vw;
+      width: 90%;
+    }
+    .instruction-list li {
+      margin-bottom: 1vw;
+      line-height: 1.7;
+    }
+    
+    .continue-btn {
+      font-family: 'Georgia', serif;
+      font-weight: bold;
+      background: #ffd100;
+      color: #232121;
+      border-radius: 28px;
+      border: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+      padding: 1vw 4vw;
+      font-size: 2vw;
+      margin-top: 2vw;
+      cursor: pointer;
+      transition: background 0.1s, color 0.1s;
+    }
+    .continue-btn:hover {
+      background: #ffea43;
+      color: #0f1042;
+    }
+
+    .back-btn {
+      position: absolute; 
+      top: 30px;
+      left: 30px;
+      background: rgba(0, 0, 0, 0.4); 
+      color: white;
+      font-size: 2.5vw; 
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      z-index: 10; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .back-btn:hover {
+      color: #ffd100; 
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 720px) {
+      .instruction-panel {padding: 5vw 2vw; max-width: 96vw;}
+      .instruction-title {font-size: 6vw;}
+      .instruction-list {font-size: 3vw;}
+      .continue-btn {font-size: 5vw;}
+      .back-btn {
+        top: 15px;
+        left: 15px;
+        font-size: 5vw;
+        width: 40px;
+        height: 40px;
+      }
+    }

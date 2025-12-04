@@ -1,0 +1,213 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial', sans-serif; 
+}
+
+.game-bg {
+    background: url('../Images/6.jpg') center center/cover fixed no-repeat; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.game-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1); 
+    z-index: 1;
+}
+
+.game-container {
+    z-index: 2; 
+    width: 90vw; 
+    max-width: 1100px;
+    height: 85vh; 
+    background: rgba(255, 255, 255, 0.95); 
+    backdrop-filter: blur(10px); 
+    border: 7px solid #e91e63;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 30px;
+    box-shadow: 0 15px 60px rgba(0, 0, 0, 0.5), 0 0 30px #ff69b4; 
+    transform: scale(0.98); 
+    animation: fadeInScale 0.8s forwards;
+}
+
+@keyframes fadeInScale {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
+.score-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-right: 30px; 
+    padding: 20px;
+    flex: 1.5;
+}
+
+#congratulations-title {
+    font-family: 'Impact', 'Arial Black', monospace; 
+    font-size: 4.5vw;
+    color: #880e4f; 
+    margin-bottom: 25px;
+    text-shadow: 4px 4px 0 #fff, 0 0 10px #ffcc00; 
+    letter-spacing: 2px;
+    animation: pulseTitle 1.5s infinite alternate;
+}
+
+@keyframes pulseTitle {
+    from { transform: scale(1); }
+    to { transform: scale(1.03); }
+}
+
+#level-display {
+    font-size: 1.8vw;
+    color: #4a148c; 
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 0 #fff;
+}
+
+#score-label {
+    font-size: 2.2vw;
+    color: #c62828; 
+    margin-top: 15px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+#final-score {
+    font-size: 8vw;
+    color: #222;
+    font-weight: 900;
+    text-shadow: 5px 5px 0 #ff80ab, 0 0 20px #e91e63; 
+    margin-bottom: 40px;
+    font-family: 'Monaco', monospace; 
+    animation: bounceScore 0.5s ease-out;
+}
+
+@keyframes bounceScore {
+    0% { transform: scale(0.5); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+#home-btn, #leaderboard-btn { 
+    background-color: #ffcc00; 
+    color: #222;
+    padding: 15px 45px;
+    font-size: 1.6vw;
+    font-weight: 800;
+    border: 3px solid #ff80ab; 
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3), 0 0 10px #ffcc00; 
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#home-btn:hover, #leaderboard-btn:hover {
+    background-color: #ffb700; 
+    transform: translateY(-3px) scale(1.05); 
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4), 0 0 15px #ffcc00; 
+}
+
+#home-btn:active, #leaderboard-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.score-image-container {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    padding-top: 20px; 
+}
+.score-image-container img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px #e91e63); 
+    transition: transform 0.5s ease;
+}
+.score-image-container img:hover {
+    transform: translateY(-5px); 
+}
+
+
+@media (max-width: 800px) {
+    .game-container {
+        width: 95vw;
+        height: 90vh;
+        flex-direction: column;
+        padding: 20px 10px;
+        border-radius: 30px;
+    }
+    .score-content {
+        order: 2; 
+        width: 100%;
+        margin-right: 0;
+        flex: none;
+    }
+    .score-image-container {
+        order: 1; 
+        max-height: 35%;
+        flex: none; 
+    }
+    #congratulations-title {
+        font-size: 8vw;
+    }
+    #score-label {
+        font-size: 4vw;
+    }
+    #final-score {
+        font-size: 15vw;
+        margin-bottom: 20px;
+    }
+    #level-display {
+        font-size: 3vw;
+    }
+    #home-btn, #leaderboard-btn {
+        font-size: 4vw;
+        padding: 10px 30px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .button-group {
+        flex-direction: row;
+        gap: 10px;
+        margin-top: 15px;
+    }
+}

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic Page Setup -->
+    <meta charset="UTF-8" />
+    <title>Mystical Heart Realm - Dashboard</title>
+    <link rel="stylesheet" href="../css/dashboard-style.css" />
+</head>
+
+<body>
+    <!-- DASHBOARD BACKGROUND MUSIC -->
+    <audio id="dashboard-soundtrack" loop>
+        <source src="Sounds/audio.mp3" type="audio/mpeg"> 
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- MAIN DASHBOARD BACKGROUND CONTAINER -->
+    <div class="dashboard-bg">
+        <div class="dashboard-content">
+            <div class="dashboard-panel">
+                
+                <!-- GAME TITLE -->
+                <h1 class="dashboard-title">MYSTICAL HEART REALM</h1>
+                
+                <!-- MENU SECTION (Split into Left and Right Panels) -->
+                <div class="menu-rows">
+                    
+                    <!-- LEFT MENU (LeaderBoard & Achievements) -->
+                    <div class="menu-left">
+                        <button class="menu-btn leaderboard" id="leaderboard-btn">LeaderBoard</button>
+                        <button class="menu-btn achievements" id="achievements-btn">Achievements</button> 
+                    </div>
+
+                    <div class="divider"></div> 
+
+                    <!-- RIGHT MENU (Play, Credits, Quiet, Sound Icon) -->
+                    <div class="menu-right">
+                        <button class="menu-btn play" id="play-btn">Play</button>
+                        <button class="menu-btn credits" id="credits-btn">Credits</button>
+                        <button class="menu-btn quiet" id="quiet-btn">Quiet</button>
+                        <img src="Images/10.png" id="sound-icon" class="icon-sound" alt="Volume Control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DASHBOARD SCRIPT (Handles Navigation, Audio, and Authentication) -->
+    <script type="module">
+        import { auth } from './firebase-config.js';
+        import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+        // AUDIO CONTROLS
+        const soundtrack = document.getElementById('dashboard-soundtrack');
+        const soundIcon = document.getElementById('sound-icon');
+        const ICON_UNMUTE = 'Images/10.png';
+        const ICON_MUTE = 'Images/11.png';
+
+        function setIconPaused() {
+            soundIcon.src = ICON_MUTE;
+            soundIcon.alt = "Volume Off";
+        }
+
+        function setIconPlaying() {
+            soundIcon.src = ICON_UNMUTE;
+            soundIcon.alt = "Volume On";
+        }
+
+        // AUTO PLAY SOUNDTRACK ON PAGE LOAD (IF ALLOWED)
+        document.addEventListener('DOMContentLoaded', () => {
+            soundtrack.volume = 0.3;
+            soundtrack.play().then(() => {
+                setIconPlaying();
+            }).catch(() => {
+                setIconPaused();
+            });
+        });
+
+        // TOGGLE SOUND ON ICON CLICK
+        soundIcon.addEventListener('click', () => {
+            if (soundtrack.paused) {
+                soundtrack.play();
+                setIconPlaying();
+            } else {
+                soundtrack.pause();
+                setIconPaused();
+            }
+        });
+
+        // FIREBASE AUTH CHECK
+        onAuthStateChanged(auth, (user) => {
+            if (!user) window.location.href = 'Login.html';
+        });
+
+        // BUTTON NAVIGATION
+        const playBtn = document.getElementById('play-btn');
+        if (playBtn) playBtn.addEventListener('click', () => { window.location.href = 'Instruction.html'; });
+
+        const creditsBtn = document.getElementById('credits-btn');
+        if (creditsBtn) creditsBtn.addEventListener('click', () => { window.location.href = 'Credits.html'; });
+
+        const leaderboardBtn = document.getElementById('leaderboard-btn');
+        if (leaderboardBtn) leaderboardBtn.addEventListener('click', () => { window.location.href = 'Leaderboard.html'; });
+
+        const achievementsBtn = document.getElementById('achievements-btn');
+        if (achievementsBtn) achievementsBtn.addEventListener('click', () => { window.location.href = 'Profile.html'; });
+
+        // QUIET BUTTON: STOPS MUSIC AND RETURNS TO LOGIN
+        const quietBtn = document.getElementById('quiet-btn');
+        if (quietBtn) quietBtn.addEventListener('click', () => {
+            if (!soundtrack.paused) soundtrack.pause();
+            try {
+                window.close();
+                setTimeout(() => {
+                    if (!window.closed) window.location.href = 'Login.html';
+                }, 100);
+            } catch (e) {
+                window.location.href = 'Login.html';
+            }
+        });
+    </script>
+</body>
+</html>

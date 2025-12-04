@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Player Profile - Mystical Heart Realm</title>
+    <link rel="stylesheet" href="game-style.css" />
+    <link rel="stylesheet" href="css/profile-style.css" />
+</head>
+<body>
+    <div class="game-bg">
+        <div class="profile-container">
+            <h1>Player Profile</h1>
+            <div class="username-display" id="profile-username">Loading...</div>
+            
+            <button id="logout-btn" class="logout-btn">🚪 Logout</button>
+
+            <div class="score-section">
+                <h2>Game History</h2>
+                <ul class="score-list" id="score-history">
+                    <li>Loading score history...</li>
+                </ul>
+            </div>
+            <button class="back-btn" onclick="window.location.href='Dashboard.html'" style="margin-top: 20px;">🏠 Go to Home</button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { auth, db } from './firebase-config.js';
+        import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+        import { collection, query, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-firestore.js";
+
+        const usernameDisplay = document.getElementById('profile-username');
+        const scoreHistoryList = document.getElementById('score-history');
+
+        // --- Authentication and Logout ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const username = user.email.split('@')[0];
+                usernameDisplay.innerText = username;
+                fetchScoreHistory(user.uid);
+            } else {
+                window.location.href = 'Login.html';
+            }
+        }, (error) => {
+            console.error("Auth state error:", error);
+            window.location.href = 'Login.html';
+        });
+
+        document.getElementById('logout-btn').addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                window.location.href = 'Login.html';
+            } catch (error) {
+                alert("Logout failed: " + error.message);
+            }
+        });
+
+        // --- Score Fetching and Display ---
+        async function fetchScoreHistory(userId) {
+            scoreHistoryList.innerHTML = '<li>Fetching records...</li>';
+
+            try {
+                const scoresCollectionRef = collection(db, "users", userId, "scores");
+                const q = query(scoresCollectionRef, orderBy("date", "desc"));
+                const querySnapshot = await getDocs(q);
+
+                let scores = [];
+                let maxScore = 0;
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    scores.push(data);
+                    if (data.score > maxScore) {
+                        maxScore = data.score;
+                    }
+                });
+
+                if (scores.length === 0) {
+                    scoreHistoryList.innerHTML = '<li>No game records found. Play a game!</li>';
+                    return;
+                }
+
+                scoreHistoryList.innerHTML = scores.map(data => {
+                    const isHighScore = data.score === maxScore && maxScore > 0;
+                    const scoreDisplay = new Intl.NumberFormat().format(data.score);
+
+                    let dateDisplay;
+                    if (data.date && data.date.toDate) { 
+                        dateDisplay = data.date.toDate().toLocaleString();
+                    } else {
+                        dateDisplay = 'N/A';
+                    }
+                    const highlightClass = isHighScore ? 'score-highlight' : '';
+
+                    return `
+                        <li class="${highlightClass}">
+                            <span>Score: ${scoreDisplay} (Level: ${data.level || '-'})</span>
+                            <span class="score-date">${dateDisplay}</span>
+                        </li>
+                    `;
+                }).join('');
+
+            } catch (error) {
+                console.error("Error fetching score history:", error);
+                scoreHistoryList.innerHTML = '<li>Failed to load history. Check console for error details.</li>';
+            }
+        }
+    </script>
+</body>
+</html>

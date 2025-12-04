@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Select Level - Mystical Heart Realm</title>
+  <link rel="stylesheet" href="css/level-style.css" />
+</head>
+<body>
+  <button class="back-btn">&#x2190;</button> 
+
+  <div class="level-bg">
+    <div class="level-overlay">
+      <h1 class="page-title">🔮 Select Your Realm Path 🔮</h1>
+      <div class="level-selection">
+        <button class="level-btn beginner" data-level="Beginner">Beginner</button>
+        <button class="level-btn intermediate" data-level="Intermediate">Intermediate</button>
+        <button class="level-btn advance" data-level="Advance">Advance</button>
+      </div>
+      <button class="start-btn" id="start-btn">Start Journey</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedLevel = null;
+
+    document.querySelector('.back-btn').addEventListener('click', function() {
+      window.history.back();
+    });
+
+    document.querySelectorAll('.level-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        selectedLevel = this.getAttribute('data-level');
+
+        document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+      });
+    });
+
+    document.getElementById('start-btn').addEventListener('click', function() {
+      if(!selectedLevel) {
+        alert('Please select a level to start the game.');
+        return;
+      }
+      localStorage.setItem('selectedLevel', selectedLevel);
+      window.location.href = 'Game.html';
+    });
+  </script>
+</body>
+</html>

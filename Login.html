@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login - Mystical Realm</title>
+  <link rel="stylesheet" href="css/login-style.css" />
+</head>
+<body>
+  <div class="bg-image">
+    <div class="container">
+      <div class="character-side">
+        <img src="Images/9.png" alt="Character" class="character-img" />
+      </div>
+      <div class="login-box">
+        <h2>WELCOME</h2>
+        <form id="login-form">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="off" />
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" />
+
+          <div class="button-row">
+            <button type="submit" class="login-btn">Login</button>
+          </div>
+        </form>
+        <div class="register-section">
+          <span>I Don’t Have an Account</span>
+          <a href="Register.html" class="register-btn">Register</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { auth } from './firebase-config.js';
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!username || !password) {
+        alert("Please enter username and password.");
+        return;
+      }
+
+      const email = username + "@example.com";
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        window.location.href = 'Dashboard.html';
+      } catch (error) {
+        alert("Login failed: " + error.message);
+      }
+    });
+  </script>
+</body>
+</html>

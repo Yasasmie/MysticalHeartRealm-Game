@@ -1,0 +1,224 @@
+
+    @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      font-family: 'Georgia', serif;
+      overflow: hidden;
+    }
+    .dashboard-bg {
+      width: 100vw;
+      height: 100vh;
+      background: url('../Images/6.jpg') center center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .dashboard-content {
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+    .dashboard-panel {
+      background: rgba(220,210,210,0.4);
+      backdrop-filter: blur(8px);
+      border-radius: 40px;
+      padding: 1vw 2.5vw 2vw 2vw;
+      min-width: 72vw;
+      min-height: 70vh;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .dashboard-title {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 3.5vw;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 2vw;
+      margin-bottom: 2vw;
+      letter-spacing: 3px;
+      color: #3a1e0f;
+      text-shadow:
+        -1px -1px 0 #fff,
+         1px -1px 0 #fff,
+        -1px 1px 0 #fff,
+         1px 1px 0 #fff,
+         0 6px 8px rgba(0,0,0,0.4);
+      position: relative;
+      z-index: 2;
+    }
+    .menu-rows {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 42vh;
+      position: relative;
+    }
+    .menu-left, .menu-right {
+      display: flex;
+      flex-direction: column;
+      gap: 4vw;
+      justify-content: center;
+      align-items: flex-end;
+      position: relative;
+      z-index: 2;
+      flex-basis: 40%;
+    }
+    .menu-left {
+      align-items: flex-end;
+      padding-right: 1.5vw;
+    }
+    .menu-right {
+      align-items: flex-start;
+      padding-left: 1.5vw;
+    }
+    .menu-btn {
+      font-family: 'Luckiest Guy', cursive;
+      font-size: 2vw;
+      font-weight: bold;
+      color: #fff;
+      padding: 0.8vw 2vw;
+      border: none;
+      outline: none;
+      margin: 0.5vw 0;
+      cursor: pointer;
+      background: none;
+      position: relative;
+      text-align: left;
+      transition: transform 0.2s ease-out;
+      text-shadow: 0 0 8px rgba(0,0,0,0.7);
+      white-space: nowrap;
+    }
+    .menu-right .menu-btn { text-align: right; }
+    .menu-btn:active { transform: scale(0.95); }
+    .menu-btn:hover { transform: scale(1.05); }
+    .divider {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 3vw;
+      height: 100%;
+      max-height: 440px;
+      background: linear-gradient(to bottom, #4a2c1f, #5e3b2b, #4a2c1f);
+      border-radius: 1.5vw;
+      box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .menu-left .menu-btn { padding-right: 4vw; }
+    .menu-left .menu-btn::before {
+      content: "";
+      display: block;
+      position: absolute;
+      left: -2vw; 
+      top: 0;
+      width: 18vw; 
+      height: 100%;
+      clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+      z-index: -1;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease-out;
+    }
+    .menu-right .menu-btn { padding-left: 4vw; }
+    .menu-right .menu-btn::before {
+      content: "";
+      display: block;
+      position: absolute;
+      right: -2vw; 
+      left: auto; 
+      top: 0;
+      width: 18vw; 
+      height: 100%;
+      clip-path: polygon(100% 0%, 0% 50%, 100% 100%);
+      z-index: -1;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease-out;
+    }
+    .leaderboard::before { background: #eb2121; }
+    .achievements::before { background: #179818; }
+    .play::before { background: #e120b9; }
+    .credits::before { background: #ffd52f; }
+    .quiet::before { background: #17c4f1; }
+    .menu-btn:hover::before {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .icon-sound {
+      position: absolute;
+      bottom: 2vw;
+      right: 3vw;
+      width: 3.5vw;
+      height: auto;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.6));
+      transition: transform 0.2s ease-in-out;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .icon-sound:hover {
+      transform: scale(1.15) rotate(5deg);
+    }
+    @media (max-width: 920px) {
+      .dashboard-panel { min-width: 96vw; }
+      .dashboard-title { font-size: 6vw; }
+      .menu-btn { font-size: 4vw; }
+      .icon-sound { width: 5vw; bottom: 3vw; right: 5vw; }
+      .divider { width: 5vw; }
+      .menu-left, .menu-right { flex-basis: 45%; gap: 6vw;}
+      .menu-left .menu-btn::before, .menu-right .menu-btn::before {
+        width: 30vw;
+      }
+      .menu-left .menu-btn { padding-right: 6vw; }
+      .menu-right .menu-btn { padding-left: 6vw; }
+    }
+    @media (max-width: 600px) {
+      .dashboard-title { font-size: 8vw; letter-spacing: 2px; }
+      .dashboard-panel { min-width: 90vw; min-height: 85vh; padding: 4vw; border-radius: 30px;}
+      .divider { display: none; }
+      .menu-rows { flex-direction: column; align-items: center; justify-content: space-around; gap: 3vw;}
+      .menu-left, .menu-right {
+          flex-direction: column;
+          gap: 6vw;
+          width: 100%;
+          align-items: center;
+          padding: 0;
+      }
+      .menu-btn {
+          font-size: 6vw;
+          padding: 2vw 5vw;
+          width: 85%;
+          text-align: center !important;
+          margin: 0;
+      }
+      .menu-left .menu-btn::before, .menu-right .menu-btn::before {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 95%;
+        clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+      }
+      .menu-btn:hover::before {
+          clip-path: polygon(5% 0%, 95% 0%, 100% 50%, 95% 100%, 5% 100%, 0% 50%);
+          transform: translateX(-50%) scale(1.03);
+      }
+      .menu-left .menu-btn, .menu-right .menu-btn {
+          padding-left: 2vw; 
+          padding-right: 2vw; 
+      }
+      .icon-sound {
+          bottom: 3vw;
+          right: 5vw;
+          width: 8vw;
+      }
+    }

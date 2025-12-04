@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register - Join the Realm</title>
+  <link rel="stylesheet" href="css/register-style.css" />
+  <script type="module" src="Register.js" defer></script>
+</head>
+<body>
+  <div class="bg-image">
+    <div class="container">
+      <div class="character-side">
+        <img src="Images/9.png" alt="Character" class="character-img" />
+      </div>
+      <div class="register-box">
+        <h2>Join the Realm</h2>
+        <form id="register-form" autocomplete="off">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" autocomplete="off" />
+
+          <label for="password">Create Password</label>
+          <input type="password" id="password" name="password" />
+
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" name="confirm-password" />
+
+          <div class="button-row">
+            <button id="submit" type="submit" class="register-btn">Register</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
